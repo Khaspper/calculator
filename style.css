@@ -1,0 +1,83 @@
+html {
+    height: 99%;
+}
+
+body {
+    margin: 0px;
+    display: flex;
+    height: 100%;
+    border: solid yellow;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(169, 169, 169);
+}
+
+#calculator {
+    background-color: black;
+    border: solid;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 400px;
+}
+
+#calculator-display{
+    color: white;
+    margin-left: auto;
+    border: solid green;
+    height: 200px;
+}
+
+#buttons {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    border: solid red;
+}
+
+#first-row, #second-row, #third-row, #fourth-row, #fifth-row {
+    width: 100%;
+    margin-top: 10px;
+    gap: 30px;
+    display: flex;
+    flex: auto;
+    border: solid;
+}
+
+#first-row > button,
+#second-row > button,
+#third-row > button,
+#fourth-row > button {
+    border: none;
+    color: white;
+    border-radius: 100px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+#equals, #decimal, #zero {
+    color: white;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: none;
+}
+#equals, #decimal {
+    flex: 1;
+}
+
+#zero {
+    flex: 2.4;
+}
+
+.operator {
+    background-color: orange;
+}
+
+.numbers {
+    background-color: rgb(95, 95, 95);
+}

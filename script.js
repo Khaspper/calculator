@@ -39,3 +39,8 @@ function multiply(firstNumber, secondNumber) {
 function divide(firstNumber, secondNumber) {
     return +(firstNumber / secondNumber).toFixed(3);
 }
+
+function clear() {
+    let calculatorDisplay = document.getElementById("calculator-display");
+    calculatorDisplay.textContent = "";
+}
