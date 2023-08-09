@@ -1,10 +1,32 @@
+const calculatorDisplay = document.getElementById('calculator-display');
+const numbers = document.querySelectorAll('.numbers');
+const operators = document.querySelectorAll('.operator');
+const clearButton = document.getElementById('clear');
+
 let firstNumber;
 let secondNumber;
-let operator;
+let chosenOperator;
+let askForFirstNumber = true;
 
-function operate(firstNumber, operator, secondNumber) {
+clearButton.addEventListener('click', clear);
+
+numbers.forEach(number => {
+    number.addEventListener('click', function() {
+        if (askForFirstNumber === true) getFirstNumber(this);
+        else getSecondNumber(this);
+    })
+})
+
+operators.forEach(operator => {
+    operator.addEventListener('click', function() {
+        askForFirstNumber = false;
+        getOperator(operator);
+    })
+})
+
+function operate(firstNumber, chosenOperator, secondNumber) {
     let result;
-    switch (operator) {
+    switch (chosenOperator) {
         case '+':
             result = add(firstNumber, secondNumber);
             break;
@@ -41,6 +63,24 @@ function divide(firstNumber, secondNumber) {
 }
 
 function clear() {
-    let calculatorDisplay = document.getElementById("calculator-display");
-    calculatorDisplay.textContent = "";
+    calculatorDisplay.textContent = '';
+}
+
+function populateDisplay(arithmetic) {
+    calculatorDisplay.textContent += arithmetic;
+}
+
+function getFirstNumber(number) {
+    firstNumber = +number.textContent;
+    populateDisplay(firstNumber);
+}
+
+function getOperator(operator) {
+    chosenOperator = ' ' + operator.textContent + ' ';
+    populateDisplay(chosenOperator);
+}
+
+function getSecondNumber(number) {
+    secondNumber = +number.textContent;
+    populateDisplay(secondNumber);
 }

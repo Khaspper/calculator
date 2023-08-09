@@ -32,7 +32,6 @@ body {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
     border: solid red;
 }
 
@@ -78,6 +77,6 @@ body {
     background-color: orange;
 }
 
-.numbers {
+.numbers, .function {
     background-color: rgb(95, 95, 95);
 }
