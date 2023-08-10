@@ -9,6 +9,7 @@ const percentageButton = document.getElementById('percent');
 let firstNumber = '';
 let secondNumber = '';
 let chosenOperator = '';
+let answer = '';
 let askForFirstNumber = true;
 let clearDisplay = false;
 let isDecimal = false;
@@ -36,6 +37,7 @@ operators.forEach(operator => {
         clearDisplay = true;
         if(firstNumber === undefined) {
             firstNumber = answer;
+            secondNumber = '';
             askForFirstNumber = false;
         }
         getOperator(operator);
