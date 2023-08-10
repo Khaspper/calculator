@@ -2,29 +2,51 @@ const calculatorDisplay = document.getElementById('calculator-display');
 const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operator');
 const clearButton = document.getElementById('clear');
+const equalButton = document.getElementById('equals');
 
-let firstNumber;
-let secondNumber;
-let chosenOperator;
+let firstNumber = '';
+let secondNumber = '';
+let chosenOperator = '';
 let askForFirstNumber = true;
+let clearDisplay = false;
 
 clearButton.addEventListener('click', clear);
 
 numbers.forEach(number => {
     number.addEventListener('click', function() {
+        if(clearDisplay === true) {
+            clearDisplayScreen();
+            clearDisplay = false;
+        }
         if (askForFirstNumber === true) getFirstNumber(this);
         else getSecondNumber(this);
     })
-})
+});
 
 operators.forEach(operator => {
     operator.addEventListener('click', function() {
         askForFirstNumber = false;
+        clearDisplay = true;
+        if(firstNumber === undefined) {
+            firstNumber = answer;
+            askForFirstNumber = false;
+        }
         getOperator(operator);
     })
-})
+});
+
+equalButton.addEventListener('click', function() {
+    clearDisplayScreen();
+    answer = operate(firstNumber, chosenOperator, secondNumber);
+    populateDisplay(answer);
+    firstNumber = undefined;
+});
 
 function operate(firstNumber, chosenOperator, secondNumber) {
+    clearDisplay = true;
+    firstNumber = +firstNumber;
+    secondNumber = +secondNumber;
+    askForFirstNumber = true;
     let result;
     switch (chosenOperator) {
         case '+':
@@ -33,10 +55,10 @@ function operate(firstNumber, chosenOperator, secondNumber) {
         case '-':
             result = subtract(firstNumber, secondNumber);
             break;
-        case '*':
+        case 'x':
             result = multiply(firstNumber, secondNumber);
             break;
-        case '/':
+        case '÷':
             result = divide(firstNumber, secondNumber);
             break;
     
@@ -63,6 +85,27 @@ function divide(firstNumber, secondNumber) {
 }
 
 function clear() {
+    clearDisplayScreen();
+    askForFirstNumber = true;
+    firstNumber = '';
+    secondNumber = '';
+    chosenOperator = '';
+}
+
+function deleteLastNumber() {
+    if(askForFirstNumber === true) {
+        firstNumber = firstNumber.slice(0, -1);    
+        clearDisplayScreen();
+        populateDisplay(firstNumber);
+    }
+    else {
+        secondNumber = secondNumber.slice(0, -1);    
+        clearDisplayScreen();
+        populateDisplay(secondNumber);
+    }
+}
+
+function clearDisplayScreen() {
     calculatorDisplay.textContent = '';
 }
 
@@ -71,16 +114,15 @@ function populateDisplay(arithmetic) {
 }
 
 function getFirstNumber(number) {
-    firstNumber = +number.textContent;
-    populateDisplay(firstNumber);
+    firstNumber += `${number.textContent}`;
+    populateDisplay(firstNumber.charAt(firstNumber.length - 1));
 }
 
 function getOperator(operator) {
-    chosenOperator = ' ' + operator.textContent + ' ';
-    populateDisplay(chosenOperator);
+    chosenOperator = operator.textContent;
 }
 
 function getSecondNumber(number) {
-    secondNumber = +number.textContent;
-    populateDisplay(secondNumber);
+    secondNumber += `${number.textContent}`;
+    populateDisplay(secondNumber.charAt(secondNumber.length - 1));
 }
