@@ -34,9 +34,13 @@ document.addEventListener('keydown', (event) => {
             populateDisplay(secondNumber);
         }
     }
-    
+
     else if(key === '.') {
-        if(askForFirstNumber === true && firstNumber.includes('.') === false) {
+        if(calculatorDisplay.textContent === "0") {
+            firstNumber += "0.";
+            populateDisplay(firstNumber);
+        }
+        else if(askForFirstNumber === true && firstNumber.includes('.') === false) {
             firstNumber += key;
             populateDisplay(firstNumber);
         }
@@ -172,7 +176,7 @@ function deleteLastNumber() {
 }
 
 function clearDisplayScreen() {
-    calculatorDisplay.textContent = '';
+    calculatorDisplay.textContent = '0';
 }
 
 function populateDisplay(arithmetic) {
@@ -182,8 +186,21 @@ function populateDisplay(arithmetic) {
 }
 
 function getFirstNumber(number) {
-    firstNumber += `${number.textContent}`;
-    populateDisplay(firstNumber);
+    if(firstNumber.length === 0 && number.textContent === '.') {
+        firstNumber += '0.';
+        populateDisplay(firstNumber);
+    }
+    if(number.textContent === '.') {
+        if(!firstNumber.includes('.')) {
+            firstNumber += `${number.textContent}`;
+            populateDisplay(firstNumber);
+        }
+        return
+    }
+    else {
+        firstNumber += `${number.textContent}`;
+        populateDisplay(firstNumber);
+    }
 }
 
 function getOperator(operator) {
@@ -191,8 +208,21 @@ function getOperator(operator) {
 }
 
 function getSecondNumber(number) {
-    secondNumber += `${number.textContent}`;
-    populateDisplay(secondNumber);
+    if(secondNumber.length === 0 && number.textContent === '.') {
+        secondNumber += '0.';
+        populateDisplay(secondNumber);
+    }
+    if(number.textContent === '.') {
+        if(!secondNumber.includes('.')) {
+            secondNumber += `${number.textContent}`;
+            populateDisplay(secondNumber);
+        }
+        return
+    }
+    else {
+        secondNumber += `${number.textContent}`;
+        populateDisplay(secondNumber);
+    }
 }
 
 function percentage() {
