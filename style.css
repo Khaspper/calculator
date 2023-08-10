@@ -2,19 +2,29 @@ html {
     height: 99%;
 }
 
+*:focus {
+    outline: none;
+}
+
 body {
     margin: 0px;
     display: flex;
     height: 100%;
-    border: solid yellow;
     justify-content: center;
     align-items: center;
     background-color: rgb(169, 169, 169);
 }
 
+#calculator-case {
+    border: solid rgb(255, 255, 255) 20px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
 #calculator {
+    border-radius: 20px;
+    padding: 10px;
     background-color: black;
-    border: solid;
     display: flex;
     flex-direction: column;
     height: 600px;
@@ -22,13 +32,13 @@ body {
 }
 
 #calculator-display{
+    padding-right: 25px;
     display: flex;
     flex-direction: column;
     justify-content: end;
-    font-size: 55px;
+    font-size: 65px;
     color: white;
     margin-left: auto;
-    border: solid green;
     height: 200px;
 }
 
@@ -36,7 +46,6 @@ body {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    border: solid red;
 }
 
 #first-row, #second-row, #third-row, #fourth-row, #fifth-row {

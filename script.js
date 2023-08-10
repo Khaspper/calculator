@@ -1,11 +1,14 @@
 const calculatorDisplay = document.getElementById('calculator-display');
 const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operator');
-const clearButton = document.getElementById('clear');
-const equalButton = document.getElementById('equals');
-const deleteButton = document.getElementById('delete');
 const percentageButton = document.getElementById('percent');
-const numericInput = document.getElementById("calculator-display");
+const addButton = document.getElementById('add');
+const subtractButton = document.getElementById('subtract');
+const divisionButton = document.getElementById('division');
+const multiplyButton = document.getElementById('multiply');
+const clearButton = document.getElementById('clear');
+const deleteButton = document.getElementById('delete');
+const equalButton = document.getElementById('equals');
 
 let firstNumber = '';
 let secondNumber = '';
@@ -18,16 +21,26 @@ let isDecimal = false;
 clearButton.addEventListener('click', clear);
 clearButton.addEventListener('dblclick', doubleClear);
 deleteButton.addEventListener('click', deleteLastNumber);
-percentageButton.addEventListener('click', percentage)
-
-numericInput.addEventListener("input", function(event) {
-  const inputValue = event.target.textContent;
-
-  // Remove non-numeric characters
-  const numericValue = inputValue.replace(/[^0-9]/g, "");
-
-  // Update the input value
-  event.target.textContent = numericValue;
+percentageButton.addEventListener('click', percentage);
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (/[0-9]/.test(key)) {
+        if(askForFirstNumber === true) {
+            firstNumber += key;
+            populateDisplay(firstNumber);
+        }
+        else {
+            secondNumber += key;
+            populateDisplay(secondNumber);
+        }
+    }
+    else if(key === '+') addButton.click();
+    else if(key === '-') subtractButton.click();
+    else if(key === '*') multiplyButton.click();
+    else if(key === '/') divisionButton.click();
+    else if(key === '%') percentageButton.click();
+    else if(key === 'Enter') equalButton.click();
+    else if(key === 'Backspace') deleteButton.click();
 });
 
 numbers.forEach(number => {
@@ -43,24 +56,10 @@ numbers.forEach(number => {
     })
 });
 
-operators.forEach(operator => {
-    operator.addEventListener('click', function() {
-        if(secondNumber !== '') {
-            firstNumber = operate(firstNumber, chosenOperator, secondNumber);
-            secondNumber = '';
-            clearDisplayScreen();
-            populateDisplay(firstNumber);
-        }
-        askForFirstNumber = false;
-        clearDisplay = true;
-        if(firstNumber === '') {
-            firstNumber = answer;
-            secondNumber = '';
-            askForFirstNumber = false;
-        }
-        getOperator(operator);
-    })
-});
+operators.forEach(operator => operator.addEventListener('click', function() {
+    getThreeValues(operator)
+}));
+    
 
 equalButton.addEventListener('click', function() {
     clearDisplayScreen();
@@ -69,6 +68,23 @@ equalButton.addEventListener('click', function() {
     firstNumber = '';
     secondNumber = '';
 });
+
+function getThreeValues(givenOperator) {
+    if(secondNumber !== '') {
+        firstNumber = operate(firstNumber, chosenOperator, secondNumber);
+        secondNumber = '';
+        clearDisplayScreen();
+        populateDisplay(firstNumber);
+    }
+    askForFirstNumber = false;
+    clearDisplay = true;
+    if(firstNumber === '') {
+        firstNumber = answer;
+        secondNumber = '';
+        askForFirstNumber = false;
+    }
+    getOperator(givenOperator);
+}
 
 function operate(firstNumber, chosenOperator, secondNumber) {
     clearDisplay = true;
