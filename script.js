@@ -33,6 +33,12 @@ numbers.forEach(number => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', function() {
+        if(secondNumber !== '') {
+            firstNumber = operate(firstNumber, chosenOperator, secondNumber);
+            secondNumber = '';
+            clearDisplayScreen();
+            populateDisplay(firstNumber);
+        }
         askForFirstNumber = false;
         clearDisplay = true;
         if(firstNumber === undefined) {
@@ -166,3 +172,20 @@ function percentage() {
         populateDisplay(secondNumber);
     }
 }
+// DONE
+// // TODO: Make it be like 12 + 7 - 5 * 3 = to whatever but basically after the user picks and operator
+// // TODO: It evaluates the previous operator and then I think you're done 
+
+// TODO: Sike you still have to change the input to a text input instead of just a regular div
+
+const numericInput = document.getElementById("calculator-display");
+
+numericInput.addEventListener("input", function(event) {
+  const inputValue = event.target.value;
+
+  // Remove non-numeric characters
+  const numericValue = inputValue.replace(/[^0-9]/g, "");
+
+  // Update the input value
+  event.target.value = numericValue;
+});
