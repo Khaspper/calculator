@@ -76,24 +76,29 @@ function operate(firstNumber, chosenOperator, secondNumber) {
 }
 
 function add(firstNumber, secondNumber) {
-    return firstNumber + secondNumber;
+    let sum = firstNumber + secondNumber;
+    return sum % 1 !== 0 ? sum.toFixed(3) : sum;
 }
 
 function subtract(firstNumber, secondNumber) {
-    return firstNumber - secondNumber;
+    let sum = firstNumber - secondNumber;
+    return sum % 1 !== 0 ? sum.toFixed(3) : sum;
 }
 
 function multiply(firstNumber, secondNumber) {
-    return firstNumber * secondNumber;
+    let product = firstNumber * secondNumber;
+    return product % 1 !== 0 ? product.toFixed(3) : product;
 }
 
 function divide(firstNumber, secondNumber) {
-    return +(firstNumber / secondNumber).toFixed(3);
+    let quotient = +(firstNumber / secondNumber);
+    return quotient % 1 !== 0 ? quotient.toFixed(3) : quotient;
 }
 
 function doubleClear() {
     clearDisplayScreen();
     askForFirstNumber = true;
+    isDecimal = false;
     firstNumber = '';
     secondNumber = '';
     chosenOperator = '';
