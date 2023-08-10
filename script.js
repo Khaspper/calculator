@@ -5,6 +5,7 @@ const clearButton = document.getElementById('clear');
 const equalButton = document.getElementById('equals');
 const deleteButton = document.getElementById('delete');
 const percentageButton = document.getElementById('percent');
+const numericInput = document.getElementById("calculator-display");
 
 let firstNumber = '';
 let secondNumber = '';
@@ -19,6 +20,15 @@ clearButton.addEventListener('dblclick', doubleClear);
 deleteButton.addEventListener('click', deleteLastNumber);
 percentageButton.addEventListener('click', percentage)
 
+numericInput.addEventListener("input", function(event) {
+  const inputValue = event.target.textContent;
+
+  // Remove non-numeric characters
+  const numericValue = inputValue.replace(/[^0-9]/g, "");
+
+  // Update the input value
+  event.target.textContent = numericValue;
+});
 
 numbers.forEach(number => {
     number.addEventListener('click', function() {
@@ -26,7 +36,9 @@ numbers.forEach(number => {
             clearDisplayScreen();
             clearDisplay = false;
         }
-        if (askForFirstNumber === true) getFirstNumber(this);
+        if (askForFirstNumber === true) {
+            getFirstNumber(this);
+        } 
         else getSecondNumber(this);
     })
 });
@@ -41,7 +53,7 @@ operators.forEach(operator => {
         }
         askForFirstNumber = false;
         clearDisplay = true;
-        if(firstNumber === undefined) {
+        if(firstNumber === '') {
             firstNumber = answer;
             secondNumber = '';
             askForFirstNumber = false;
@@ -54,7 +66,8 @@ equalButton.addEventListener('click', function() {
     clearDisplayScreen();
     answer = operate(firstNumber, chosenOperator, secondNumber);
     populateDisplay(answer);
-    firstNumber = undefined;
+    firstNumber = '';
+    secondNumber = '';
 });
 
 function operate(firstNumber, chosenOperator, secondNumber) {
@@ -136,19 +149,14 @@ function clearDisplayScreen() {
 }
 
 function populateDisplay(arithmetic) {
-    calculatorDisplay.textContent += arithmetic;
+    clearDisplayScreen();
+    console.log(arithmetic);
+    calculatorDisplay.textContent = arithmetic;
 }
 
 function getFirstNumber(number) {
-    if(number.textContent === '.' && isDecimal === false) {
-        isDecimal = true;
-        firstNumber += `${number.textContent}`;
-        populateDisplay(firstNumber.charAt(firstNumber.length - 1));
-    }
-    else if (number.textContent !== '.') {
-        firstNumber += `${number.textContent}`;
-        populateDisplay(firstNumber.charAt(firstNumber.length - 1));
-    }
+    firstNumber += `${number.textContent}`;
+    populateDisplay(firstNumber);
 }
 
 function getOperator(operator) {
@@ -157,7 +165,7 @@ function getOperator(operator) {
 
 function getSecondNumber(number) {
     secondNumber += `${number.textContent}`;
-    populateDisplay(secondNumber.charAt(secondNumber.length - 1));
+    populateDisplay(secondNumber);
 }
 
 function percentage() {
@@ -178,14 +186,3 @@ function percentage() {
 
 // TODO: Sike you still have to change the input to a text input instead of just a regular div
 
-const numericInput = document.getElementById("calculator-display");
-
-numericInput.addEventListener("input", function(event) {
-  const inputValue = event.target.value;
-
-  // Remove non-numeric characters
-  const numericValue = inputValue.replace(/[^0-9]/g, "");
-
-  // Update the input value
-  event.target.value = numericValue;
-});

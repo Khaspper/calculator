@@ -22,14 +22,14 @@ body {
 }
 
 #calculator-display{
-    margin-top: 50px;
     display: flex;
-    color: white;
+    flex-direction: column;
+    justify-content: end;
     font-size: 55px;
-    background-color: black;
+    color: white;
+    margin-left: auto;
     border: solid green;
-    height: 150px;
-    width: auto;
+    height: 200px;
 }
 
 #buttons {
