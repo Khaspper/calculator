@@ -3,6 +3,7 @@ const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operator');
 const clearButton = document.getElementById('clear');
 const equalButton = document.getElementById('equals');
+const deleteButton = document.getElementById('delete');
 
 let firstNumber = '';
 let secondNumber = '';
@@ -11,6 +12,9 @@ let askForFirstNumber = true;
 let clearDisplay = false;
 
 clearButton.addEventListener('click', clear);
+clearButton.addEventListener('dblclick', doubleClear);
+deleteButton.addEventListener('click', deleteLastNumber);
+
 
 numbers.forEach(number => {
     number.addEventListener('click', function() {
@@ -84,12 +88,18 @@ function divide(firstNumber, secondNumber) {
     return +(firstNumber / secondNumber).toFixed(3);
 }
 
-function clear() {
+function doubleClear() {
     clearDisplayScreen();
     askForFirstNumber = true;
     firstNumber = '';
     secondNumber = '';
     chosenOperator = '';
+}
+
+function clear() {
+    clearDisplayScreen();
+    if (askForFirstNumber === true) doubleClear();
+    else secondNumber = '';
 }
 
 function deleteLastNumber() {
