@@ -34,6 +34,17 @@ document.addEventListener('keydown', (event) => {
             populateDisplay(secondNumber);
         }
     }
+    
+    else if(key === '.') {
+        if(askForFirstNumber === true && firstNumber.includes('.') === false) {
+            firstNumber += key;
+            populateDisplay(firstNumber);
+        }
+        else if (firstNumber.includes('.') === false) {
+            secondNumber += key;
+            populateDisplay(secondNumber);
+        }
+    }
     else if(key === '+') addButton.click();
     else if(key === '-') subtractButton.click();
     else if(key === '*') multiplyButton.click();
