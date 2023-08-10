@@ -4,16 +4,19 @@ const operators = document.querySelectorAll('.operator');
 const clearButton = document.getElementById('clear');
 const equalButton = document.getElementById('equals');
 const deleteButton = document.getElementById('delete');
+const percentageButton = document.getElementById('percent');
 
 let firstNumber = '';
 let secondNumber = '';
 let chosenOperator = '';
 let askForFirstNumber = true;
 let clearDisplay = false;
+let isDecimal = false;
 
 clearButton.addEventListener('click', clear);
 clearButton.addEventListener('dblclick', doubleClear);
 deleteButton.addEventListener('click', deleteLastNumber);
+percentageButton.addEventListener('click', percentage)
 
 
 numbers.forEach(number => {
@@ -65,7 +68,7 @@ function operate(firstNumber, chosenOperator, secondNumber) {
         case '÷':
             result = divide(firstNumber, secondNumber);
             break;
-    
+
         default:
             break;
     }
@@ -124,8 +127,15 @@ function populateDisplay(arithmetic) {
 }
 
 function getFirstNumber(number) {
-    firstNumber += `${number.textContent}`;
-    populateDisplay(firstNumber.charAt(firstNumber.length - 1));
+    if(number.textContent === '.' && isDecimal === false) {
+        isDecimal = true;
+        firstNumber += `${number.textContent}`;
+        populateDisplay(firstNumber.charAt(firstNumber.length - 1));
+    }
+    else if (number.textContent !== '.') {
+        firstNumber += `${number.textContent}`;
+        populateDisplay(firstNumber.charAt(firstNumber.length - 1));
+    }
 }
 
 function getOperator(operator) {
@@ -135,4 +145,17 @@ function getOperator(operator) {
 function getSecondNumber(number) {
     secondNumber += `${number.textContent}`;
     populateDisplay(secondNumber.charAt(secondNumber.length - 1));
+}
+
+function percentage() {
+    if(askForFirstNumber === true) {
+        firstNumber = divide(firstNumber, 100);
+        clearDisplayScreen();
+        populateDisplay(firstNumber);
+    }
+    else if(askForFirstNumber === false) {
+        secondNumber = divide(secondNumber, 100);
+        clearDisplayScreen();
+        populateDisplay(secondNumber);
+    }
 }
