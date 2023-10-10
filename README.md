@@ -1,1 +1,1 @@
-# calculator-odin
+# calculator
