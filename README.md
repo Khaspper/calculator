@@ -17,7 +17,7 @@ This is a web-based calculator built as part of [The Odin Project](https://www.t
 
 ## Live Demo
 
-You can try the live version of the calculator [here]([https://khaspper.github.io/calculator/]).
+You can try the live version of the calculator [here](https://khaspper.github.io/calculator/).
 
 ## Installation and Setup
 
