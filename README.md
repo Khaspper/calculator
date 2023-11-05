@@ -19,10 +19,6 @@ This is a web-based calculator built as part of [The Odin Project](https://www.t
 
 You can try the live version of the calculator [here](#add-your-live-demo-link-here).
 
-## Project Screenshot
-
-![Calculator Screenshot](#add-your-project-screenshot-file-path-here)
-
 ## Installation and Setup
 
 To run this project locally, follow these steps:
